@@ -12,7 +12,16 @@ namespace MAP_TEST
 	{
 	public:
 
-		TEST_METHOD(insert_and_find_test)
+		TEST_METHOD(find_test)
+		{
+			TreeMap<int, int> map;
+			map.insert(1, 11);
+			map.insert(2, 22);
+			Assert::AreEqual(map.find(1), 11);
+			Assert::AreEqual(map.find(2), 22);
+		}
+
+		TEST_METHOD(insert_test)
 		{
 			TreeMap<int, int> map;
 			map.insert(1, 11);
@@ -45,7 +54,8 @@ namespace MAP_TEST
 			Assert::ExpectException<std::invalid_argument>(func);
 
 		}
-		TEST_METHOD(get_keys_and_get_values_test) {
+
+		TEST_METHOD(get_keys_test) {
 			TreeMap<int, int> map;
 			map.insert(1, 11);
 			map.insert(2, 22);
@@ -53,11 +63,24 @@ namespace MAP_TEST
 			Assert::AreEqual(map.get_keys().at(0), 1);
 			Assert::AreEqual(map.get_keys().at(1), 2);
 			Assert::AreEqual(map.get_keys().at(2), 3);
-		
-			Assert::AreEqual(map.get_values().at(0), 11);
-			Assert::AreEqual(map.get_values().at(1), 22);
-			Assert::AreEqual(map.get_values().at(2), 33);
 		}
 
+		TEST_METHOD(get_values_test) {
+			TreeMap<int, int> map;
+			map.insert(1, 11);
+			map.insert(2, 22);
+			map.insert(3, 33);
+				Assert::AreEqual(map.get_values().at(0), 11);
+				Assert::AreEqual(map.get_values().at(1), 22);
+				Assert::AreEqual(map.get_values().at(2), 33);
+		}
+		TEST_METHOD(print_exception_test) {
+			auto func = [] {
+				TreeMap<int, int> map;
+				map.print();
+			};
+
+			Assert::ExpectException<std::out_of_range>(func);
+		}
 	};
 }
